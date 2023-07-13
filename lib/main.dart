@@ -18,17 +18,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('FIREBASE'),
-        ),
-        body: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(25),
-            child: MainScreen(),
-          ),
+        home: Scaffold(
+      appBar: AppBar(
+        title: const Text('FIREBASE'),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Colors.blue,
+            Colors.red,
+          ],
+        )),
+        child: const Padding(
+          padding: EdgeInsets.all(25),
+          child: MainScreen(),
         ),
       ),
-    );
+    ));
   }
 }

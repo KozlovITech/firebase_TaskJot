@@ -22,23 +22,21 @@ class FirebaseScreen extends StatelessWidget {
                 Text(client['name']),
                 Text(client['email']),
                 Text(client['mobile']),
-                Text(client['photo']),
                 IconButton(
-                    onPressed: () {
-                      var collection =
-                          FirebaseFirestore.instance.collection('client');
-                      collection.doc(client.id).delete();
-                    },
-                    icon: const Icon(Icons.delete))
+                  onPressed: () {
+                    var collection =
+                        FirebaseFirestore.instance.collection('client');
+                    collection.doc(client.id).delete();
+                  },
+                  icon: const Icon(Icons.delete),
+                )
               ],
             );
             clientWidgets.add(clientWidget);
           }
         }
-        return Expanded(
-          child: ListView(
-            children: clientWidgets,
-          ),
+        return ListView(
+          children: clientWidgets,
         );
       },
     );

@@ -18,13 +18,21 @@ class FirebasePhoto extends StatelessWidget {
             final clientWidget = Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(client['photo']),
-                SizedBox(height: 15,),
+                //Text(client['photo']),
+                const SizedBox(height: 15,),
                 Image.network(
                   client['photo'],
                   height: 150,
                   fit: BoxFit.fill,
                 ),
+                IconButton(
+                  onPressed: () {
+                    var collection =
+                    FirebaseFirestore.instance.collection('photo');
+                    collection.doc(client.id).delete();
+                  },
+                  icon: const Icon(Icons.delete),
+                )
                 /*IconButton(
                   onPressed: () {
                     var collection =
@@ -38,10 +46,8 @@ class FirebasePhoto extends StatelessWidget {
             clientWidgets.add(clientWidget);
           }
         }
-        return Expanded(
-          child: ListView(
+        return  ListView(
             children: clientWidgets,
-          ),
         );
       },
     );

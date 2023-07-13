@@ -14,6 +14,7 @@ class MainScreen extends StatelessWidget {
     final emailController = TextEditingController();
     final mobileController = TextEditingController();
     final photoController = TextEditingController();
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
       child: Column(
@@ -83,8 +84,8 @@ class MainScreen extends StatelessWidget {
             child: const Text("Add Image"),
           ),
           const SizedBox(height: 10),
-          const SizedBox(
-            height: 200,
+          SizedBox(
+            height: screenHeight - 10,
             width: 200,
             child: FirebasePhoto(),
           ),
@@ -93,3 +94,5 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
+
+
