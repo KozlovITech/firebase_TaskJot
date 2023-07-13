@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566248251693",
+    "project_id": "ithinkyouwork-b0dab",
+    "storage_bucket": "ithinkyouwork-b0dab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566248251693:android:0430f89ae50142fba6b3a4",
+        "android_client_info": {
+          "package_name": "com.example.firebasetrain2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566248251693-brvpt8aa7mbm9ph27qdgmm81m6drim67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeyLkaHe472lGVGSR-kXtwPQY6ugQb-Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566248251693-brvpt8aa7mbm9ph27qdgmm81m6drim67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
