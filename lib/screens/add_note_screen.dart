@@ -4,8 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
-class AddNoteScreen extends StatelessWidget {
+class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AddNoteScreen> createState() => _AddNoteScreenState();
+}
+
+class _AddNoteScreenState extends State<AddNoteScreen> {
+  int _index = 0;
+
+  void indexId(){
+    setState(() {
+      _index++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +52,11 @@ class AddNoteScreen extends StatelessWidget {
             onPressed: () {
               CollectionReference collRef =
               FirebaseFirestore.instance.collection('Note');
-              collRef.add({
+              collRef.doc('$_index').set({
                 'name': nameController.text,
                 'text': textController.text,
               });
+              indexId();
             },
             child: const Text("Add Note"),
           ),

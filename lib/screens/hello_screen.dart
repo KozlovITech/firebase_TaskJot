@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HelloScreen extends StatelessWidget {
+class HelloScreen extends StatefulWidget {
   const HelloScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HelloScreen> createState() => _HelloScreenState();
+}
+
+class _HelloScreenState extends State<HelloScreen> {
+  int _index = 0;
+
+  void indexId(){
+    setState(() {
+      _index++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +51,12 @@ class HelloScreen extends StatelessWidget {
             onPressed: () {
               CollectionReference collRef =
                   FirebaseFirestore.instance.collection('client');
-              collRef.add({
+              collRef.doc('$_index').set({
                 'name': nameController.text,
                 'email': emailController.text,
                 'mobile': mobileController.text,
               });
+              indexId();
             },
             child: const Text("Add Client"),
           ),
