@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'firebase_on_screen.dart';
+import 'Navigator.dart';
+import 'firebase_settings/firebase_on_screen.dart';
 import 'firebase_read.dart';
 import 'main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         title: const Text('FIREBASE'),
       ),
-      body: Container(
+      body: /*Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topRight,
@@ -31,12 +32,13 @@ class MyApp extends StatelessWidget {
             Colors.blue,
             Colors.red,
           ],
-        )),
-        child: const Padding(
+        )),*/
+       // child:
+            Padding(
           padding: EdgeInsets.all(25),
-          child: MainScreen(),
+          child: MainNavigator(),
         ),
       ),
-    ));
+    );
   }
 }
