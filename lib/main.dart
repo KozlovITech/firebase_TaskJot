@@ -1,3 +1,5 @@
+import 'package:firebasetrain2/login_page.dart';
+import 'package:firebasetrain2/main_page.dart';
 import 'package:flutter/material.dart';
 
 import 'Navigator.dart';
@@ -34,9 +36,10 @@ class MyApp extends StatelessWidget {
           ],
         )),*/
        // child:
-            Padding(
+            const Padding(
           padding: EdgeInsets.all(25),
-          child: MainNavigator(),
+         // child: MainNavigator(),
+          child: MainPage(),
         ),
       ),
     );
