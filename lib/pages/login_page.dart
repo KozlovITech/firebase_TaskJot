@@ -36,12 +36,21 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Padding(
+                padding: EdgeInsets.only(left: 65),
+                child: Image.asset('assets/img/log.png',
+                    width: 200,
+                    height: 200,
+                    alignment: Alignment.center,
+                  ),
+              ),
+
+              /*const Icon(
                 Icons.android,
                 size: 100,
-              ),
+              ),*/
               const SizedBox(
-                height: 100,
+                height: 25,
               ),
               const Text(
                 'WELCOME',
@@ -55,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(
-                height: 50,
+                height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),

@@ -50,31 +50,37 @@ class _MainNavigatorState extends State<MainNavigator> {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: CustomNavigationBar(
-            isFloating: true,
-            elevation: 2,
-            iconSize: 30,
-            borderRadius: const Radius.circular(20),
-            selectedColor: Colors.white,
-            unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
-            backgroundColor: const Color.fromARGB(255, 22, 22, 22),
-            strokeColor: Colors.white,
-            items: [
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.home_outlined),
-              ),
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.people),
-              ),
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.sunny),
-              ),
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.grass),
-              ),
-            ],
-            onTap: _onItemTapped,
-            currentIndex: _selectedIndex,
+          child: Container(
+            child: CustomNavigationBar(
+              isFloating: true,
+              elevation: 2,
+              iconSize: 30,
+              borderRadius: const Radius.circular(20),
+              selectedColor: Colors.white,
+              unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
+              backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+              strokeColor: Colors.white,
+              items: [
+                CustomNavigationBarItem(
+                  icon: Image.asset('assets/img/home_bottom.png',
+                  ),
+                ),
+                CustomNavigationBarItem(
+                  icon: Image.asset('assets/img/note_bottom.png',
+                  ),
+                ),
+                CustomNavigationBarItem(
+                  icon: Image.asset('assets/img/create_note_bottom.png',
+                  ),
+                ),
+                CustomNavigationBarItem(
+                  icon: Image.asset('assets/img/profile_bottom.png',
+                  ),
+                ),
+              ],
+              onTap: _onItemTapped,
+              currentIndex: _selectedIndex,
+            ),
           ),
         ),
       ),

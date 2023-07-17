@@ -40,30 +40,56 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          TextFormField(
-            controller: nameController,
-            decoration: const InputDecoration(
-              hintText: 'Name Note',
-            ),
+    return Center(
+
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: 'Name Note',
+                ),
+              ),
+              TextFormField(
+                controller: textController,
+                decoration: const InputDecoration(
+                  hintText: 'Text Note',
+                ),
+              ),
+              SizedBox(height: 25,),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: GestureDetector(
+                  onTap: addNote,
+                  child: Container(
+                    width: 200,
+                    height: 50,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Add Note',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
           ),
-          TextFormField(
-            controller: textController,
-            decoration: const InputDecoration(
-              hintText: 'Text Note',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              addNote();
-              indexId();
-            },
-            child: const Text("Add Note"),
-          ),
-          const SizedBox(height: 10),
-        ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 class HelloScreen extends StatefulWidget {
   const HelloScreen({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class _HelloScreenState extends State<HelloScreen> {
     });
   }
 
+
+
   final user = FirebaseAuth.instance.currentUser!;
   
   @override
@@ -29,50 +32,104 @@ class _HelloScreenState extends State<HelloScreen> {
 
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          TextFormField(
-            controller: nameController,
-            decoration: const InputDecoration(
-              hintText: 'Name',
+    Future<void> addClient() async {
+      await FirebaseFirestore.instance.collection('client')
+          .doc('$_index').set({
+        'name': nameController.text,
+        'email': emailController.text,
+        'mobile': mobileController.text,
+      });
+      indexId();
+    }
+    return Column(
+      children: [
+        ClipPath(
+          clipper: WaveClipperOne(),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xff673ab7), Color(0xff9c27b0)],
+                stops: [0.1, 1],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+              ),
             ),
+            height: 100,
+            //color: Colors.deepPurple,
+            child: Center(child: Text("Note",style: TextStyle(fontSize:32,
+            color: Colors.white,
+            letterSpacing: 12),
+            )),
           ),
-          TextFormField(
-            controller: emailController,
-            decoration: const InputDecoration(
-              hintText: 'Email',
-            ),
-          ),
-          TextFormField(
-            controller: mobileController,
-            decoration: const InputDecoration(
-              hintText: 'Phone number',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              CollectionReference collRef =
-                  FirebaseFirestore.instance.collection('client');
-              collRef.doc('$_index').set({
-                'name': nameController.text,
-                'email': emailController.text,
-                'mobile': mobileController.text,
-              });
-              indexId();
-            },
-            child: const Text("Add Client"),
-          ),
-          const SizedBox(height: 10),
+        ),
+        SizedBox(height: 10),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      hintText: 'Name',
+                    ),
+                  ),
+                  TextFormField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                    ),
+                  ),
+                  TextFormField(
+                    controller: mobileController,
+                    decoration: const InputDecoration(
+                      hintText: 'Phone number',
+                    ),
+                  ),
+                  SizedBox(height: 25,),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: GestureDetector(
+                      onTap: addClient,
+                      child: Container(
+                        width: 200,
+                        height: 50,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Add User',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
 
 
-          Text("Signed as: ${user.email!}",
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-            ),),
-        ],
-      ),
+                  const SizedBox(height: 10),
+
+
+                  Text("Signed as: ${user.email!}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
