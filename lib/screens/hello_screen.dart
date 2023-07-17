@@ -62,13 +62,7 @@ class _HelloScreenState extends State<HelloScreen> {
             child: const Text("Add Client"),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "It's Hello Screen",
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.purple
-            ),
-          ),
+
 
           ElevatedButton(
             onPressed: () {

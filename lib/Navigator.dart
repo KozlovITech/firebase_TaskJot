@@ -40,10 +40,13 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: _onPageChanged,
-          children: _screens,
+        body: Container(
+
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: _onPageChanged,
+            children: _screens,
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(bottom: 10),

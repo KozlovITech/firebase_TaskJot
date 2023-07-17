@@ -61,13 +61,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             child: const Text("Add Note"),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "It's Add Note Screen",
-            style: TextStyle(
-                fontSize: 24,
-                color: Colors.purple
-            ),
-          ),
+
         ],
       ),
     );

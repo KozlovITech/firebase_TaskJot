@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,10 +12,10 @@ class ProfileScreen extends StatelessWidget {
 
     //final screenHeight = MediaQuery.of(context).size.height;
 
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: Column(
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Name:'),
@@ -22,18 +23,17 @@ class ProfileScreen extends StatelessWidget {
               Text('Mobile:'),
             ],
           ),
-          SizedBox(height: 10),
-          SizedBox(
+          const SizedBox(height: 10),
+          const SizedBox(
             height: 100,
             child: FirebaseScreen(),
           ),
-          SizedBox(height: 10),
-          Text(
-            "It's Profile Screen",
-            style: TextStyle(
-                fontSize: 24,
-                color: Colors.purple
-            ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            child: const Text("Sign Out"),
           ),
 
 
