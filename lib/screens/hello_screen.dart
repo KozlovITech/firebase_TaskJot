@@ -19,6 +19,8 @@ class _HelloScreenState extends State<HelloScreen> {
     });
   }
 
+  final user = FirebaseAuth.instance.currentUser!;
+  
   @override
   Widget build(BuildContext context) {
     final nameController = TextEditingController();
@@ -64,13 +66,11 @@ class _HelloScreenState extends State<HelloScreen> {
           const SizedBox(height: 10),
 
 
-          ElevatedButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            child: const Text("Sign Out"),
-          ),
-
+          Text("Signed as: ${user.email!}",
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+            ),),
         ],
       ),
     );

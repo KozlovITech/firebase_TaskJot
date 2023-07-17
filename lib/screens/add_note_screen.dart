@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -22,9 +21,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Future<void> addNote() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference userCollection =
-    FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('users');
     DocumentReference userDocument =
-    userCollection.doc(userId).collection('Note').doc('$_index');
+        userCollection.doc(userId).collection('Note').doc('$_index');
 
     await userDocument.set({
       'name': nameController.text,
@@ -57,7 +56,10 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: addNote,
+            onPressed: () {
+              addNote();
+              indexId();
+            },
             child: const Text("Add Note"),
           ),
           const SizedBox(height: 10),
