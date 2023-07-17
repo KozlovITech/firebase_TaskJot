@@ -42,6 +42,7 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   auto_size_text: ^3.0.0
   flutter_gradients_reborn: ^1.0.0+7
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   flutter_test:
