@@ -35,6 +35,8 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.purple
             ),
           ),
+
+
         ],
       ),
     );

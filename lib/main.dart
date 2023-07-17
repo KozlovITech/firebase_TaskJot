@@ -1,14 +1,6 @@
-import 'package:firebasetrain2/login_page.dart';
-import 'package:firebasetrain2/main_page.dart';
+import 'package:firebasetrain2/auth/main_page.dart';
 import 'package:flutter/material.dart';
-
-import 'Navigator.dart';
-import 'firebase_settings/firebase_on_screen.dart';
-import 'firebase_read.dart';
-import 'main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -20,23 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  const MaterialApp(
         home: Scaffold(
-      appBar: AppBar(
-        title: const Text('FIREBASE'),
-      ),
       body: /*Container(
-        decoration: const BoxDecoration(
+        decoration:  const BoxDecoration(
             gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Colors.blue,
-            Colors.red,
-          ],
-        )),*/
+              colors: [Color(0xff673ab7), Color(0xff9c27b0)],
+              stops: [0.1, 1],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),),
        // child:
-            const Padding(
+            child: const*/ Padding(
           padding: EdgeInsets.all(25),
          // child: MainNavigator(),
           child: MainPage(),
