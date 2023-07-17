@@ -15,14 +15,14 @@ class _RegisterPageState extends State<RegisterPage> {
   final _confirmPasswordController = TextEditingController();
 
   Future signUp() async {
-  if(passwordConfirmed()){
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-  } else{
-    return false;
-  }
+    if(passwordConfirmed()){
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } else{
+      return false;
+    }
   }
 
   @override
@@ -33,11 +33,11 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  bool passwordConfirmed (){
-    if(_passwordController.text.trim() == _confirmPasswordController.text.trim()){
+  bool passwordConfirmed() {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide:  const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     hintText: 'Password',
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _confirmPasswordController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide:  const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     hintText: 'Confirm password',

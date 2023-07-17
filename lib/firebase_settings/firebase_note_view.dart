@@ -1,12 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseNoteView extends StatelessWidget {
   const FirebaseNoteView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference note = FirebaseFirestore.instance.collection('Note');
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    CollectionReference note = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('Note');
 
     return StreamBuilder<QuerySnapshot>(
       stream: note.snapshots(),
@@ -50,8 +55,10 @@ class FirebaseNoteView extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      var collection =
-                          FirebaseFirestore.instance.collection('Note');
+                      var collection = FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(userId)
+                          .collection('Note');
                       collection.doc(client.id).delete();
                     },
                     icon: const Icon(

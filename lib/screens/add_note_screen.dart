@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({Key? key}) : super(key: key);
@@ -14,17 +13,32 @@ class AddNoteScreen extends StatefulWidget {
 class _AddNoteScreenState extends State<AddNoteScreen> {
   int _index = 0;
 
-  void indexId(){
+  void indexId() {
     setState(() {
       _index++;
     });
   }
 
+  Future<void> addNote() async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    CollectionReference userCollection =
+    FirebaseFirestore.instance.collection('users');
+    DocumentReference userDocument =
+    userCollection.doc(userId).collection('Note').doc('$_index');
+
+    await userDocument.set({
+      'name': nameController.text,
+      'text': textController.text,
+    });
+
+    indexId();
+  }
+
+  final nameController = TextEditingController();
+  final textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final textController = TextEditingController();
-
     final screenHeight = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
@@ -42,30 +56,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
               hintText: 'Text Note',
             ),
           ),
-       /*   TextFormField(
-            controller: mobileController,
-            decoration: const InputDecoration(
-              hintText: 'Phone number',
-            ),
-          ),*/
           ElevatedButton(
-            onPressed: () {
-              CollectionReference collRef =
-              FirebaseFirestore.instance.collection('Note');
-              collRef.doc('$_index').set({
-                'name': nameController.text,
-                'text': textController.text,
-              });
-              indexId();
-            },
+            onPressed: addNote,
             child: const Text("Add Note"),
           ),
           const SizedBox(height: 10),
-
         ],
       ),
     );
   }
 }
-
-
