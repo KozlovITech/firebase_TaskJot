@@ -40,7 +40,7 @@ class _MainNavigatorState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
+        body: SizedBox(
 
           child: PageView(
             controller: _pageController,
@@ -50,37 +50,35 @@ class _MainNavigatorState extends State<MainNavigator> {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: Container(
-            child: CustomNavigationBar(
-              isFloating: true,
-              elevation: 2,
-              iconSize: 30,
-              borderRadius: const Radius.circular(20),
-              selectedColor: Colors.white,
-              unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
-              backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-              strokeColor: Colors.white,
-              items: [
-                CustomNavigationBarItem(
-                  icon: Image.asset('assets/img/home_bottom.png',
-                  ),
+          child: CustomNavigationBar(
+            isFloating: true,
+            elevation: 2,
+            iconSize: 30,
+            borderRadius: const Radius.circular(20),
+            selectedColor: Colors.white,
+            unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
+            backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+            strokeColor: Colors.white,
+            items: [
+              CustomNavigationBarItem(
+                icon: Image.asset('assets/img/home_bottom.png',
                 ),
-                CustomNavigationBarItem(
-                  icon: Image.asset('assets/img/note_bottom.png',
-                  ),
+              ),
+              CustomNavigationBarItem(
+                icon: Image.asset('assets/img/note_bottom.png',
                 ),
-                CustomNavigationBarItem(
-                  icon: Image.asset('assets/img/create_note_bottom.png',
-                  ),
+              ),
+              CustomNavigationBarItem(
+                icon: Image.asset('assets/img/create_note_bottom.png',
                 ),
-                CustomNavigationBarItem(
-                  icon: Image.asset('assets/img/profile_bottom.png',
-                  ),
+              ),
+              CustomNavigationBarItem(
+                icon: Image.asset('assets/img/profile_bottom.png',
                 ),
-              ],
-              onTap: _onItemTapped,
-              currentIndex: _selectedIndex,
-            ),
+              ),
+            ],
+            onTap: _onItemTapped,
+            currentIndex: _selectedIndex,
           ),
         ),
       ),
