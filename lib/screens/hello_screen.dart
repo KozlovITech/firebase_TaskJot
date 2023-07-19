@@ -23,6 +23,7 @@ class _HelloScreenState extends State<HelloScreen> {
 
 
   final user = FirebaseAuth.instance.currentUser!;
+
   
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class _HelloScreenState extends State<HelloScreen> {
         ClipPath(
           clipper: WaveClipperOne(),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xff673ab7), Color(0xff9c27b0)],
                 stops: [0.1, 1],
@@ -56,13 +57,13 @@ class _HelloScreenState extends State<HelloScreen> {
             ),
             height: 100,
             //color: Colors.deepPurple,
-            child: Center(child: Text("Note",style: TextStyle(fontSize:32,
+            child: const Center(child: Text("Note",style: TextStyle(fontSize:32,
             color: Colors.white,
             letterSpacing: 12),
             )),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -87,7 +88,7 @@ class _HelloScreenState extends State<HelloScreen> {
                       hintText: 'Phone number',
                     ),
                   ),
-                  SizedBox(height: 25,),
+                  const SizedBox(height: 25,),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -124,6 +125,8 @@ class _HelloScreenState extends State<HelloScreen> {
                       fontSize: 20,
                       color: Colors.black,
                     ),),
+
+
                 ],
               ),
             ),

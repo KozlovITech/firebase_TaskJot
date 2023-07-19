@@ -1,45 +1,44 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../component/text_box.dart';
+import '../firebase_settings/firebase_profile.dart';
 
-import '../firebase_settings/firebase_on_screen.dart';
-
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
+  //all users
+  final userCollection = FirebaseFirestore.instance.collection('Users');
+
+
+
   @override
   Widget build(BuildContext context) {
-
     //final screenHeight = MediaQuery.of(context).size.height;
 
-    return  Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Name:'),
-                Text('Email:'),
-                Text('Mobile:'),
-              ],
-            ),
-            const SizedBox(height: 10),
-            const SizedBox(
-              height: 100,
-              child: FirebaseScreen(),
-            ),
-            const SizedBox(height: 10),
+    return  SafeArea(
+      child: Column(
+        children: [
+          const Expanded(
+            child: FirebaseProfile(),
+          ),
 
 
-            SizedBox(height: 25,),
-
-            Padding(
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: GestureDetector(
                 onTap:  signOut,
@@ -64,12 +63,14 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
+          ),
 
-          ],
-        ),
+          SizedBox()
+
+        ],
       ),
+
+
     );
   }
 }
-
-

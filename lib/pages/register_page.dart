@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -17,10 +18,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     if(passwordConfirmed()){
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      //after creating users? create a new doc.
+      FirebaseFirestore.instance. 
+    collection("Users").
+    doc(userCredential.user!.email).
+    set({
+        'username' : _emailController.text.split('@')[0],
+        'bio': 'Empty bio..',
+        'mobile phone': '+38065'
+      });
+
     } else{
       return false;
     }

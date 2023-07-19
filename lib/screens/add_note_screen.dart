@@ -40,6 +40,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     saveIndex();
   }
 
+
+
   Future<void> addNote() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference userCollection =

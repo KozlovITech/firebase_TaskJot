@@ -14,12 +14,12 @@ class MainNavigator extends StatefulWidget {
 }
 
 class _MainNavigatorState extends State<MainNavigator> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
 
   int _selectedIndex = 0;
 
-  List<Widget> _screens = [
+  final List<Widget> _screens = [
     const HelloScreen(),
     const NoteScreen(),
     const AddNoteScreen(),
