@@ -5,29 +5,59 @@ class MyTextBox extends StatelessWidget {
   final String sectionName;
   void Function()? onPressed;
 
- MyTextBox({Key? key, required this.text, required this.sectionName,required this.onPressed}) : super(key: key);
+  MyTextBox(
+      {Key? key,
+      required this.text,
+      required this.sectionName,
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
-        color: Colors.grey,
+      decoration: BoxDecoration(
+        color: Colors.black,
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: const EdgeInsets.only(left: 15,
-      bottom: 15,),
+      padding: const EdgeInsets.only(
+        left: 15,
+        bottom: 15,
+      ),
       margin: const EdgeInsets.only(left: 15, right: 20, top: 20),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(sectionName),
-
-          IconButton(
-              onPressed: onPressed,
-              icon: const Icon(Icons.settings),
+          Row(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Flexible(
+                  child: Column(
+                    children: [
+                      Text(
+                        sectionName,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(144, 10, 206, 1.0), fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 5),
+              Text(
+                text,
+                style: const TextStyle(
+                    color: Color.fromRGBO(14, 236, 223, 1), fontSize: 20),
+              ),
+            ],
           ),
-
-
-          Text(text),
+          IconButton(
+            onPressed: onPressed,
+            icon: const Icon(
+              Icons.settings,
+              color: Color.fromRGBO(144, 10, 206, 1.0),
+            ),
+          ),
         ],
       ),
     );

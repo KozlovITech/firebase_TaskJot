@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../component/text_box.dart';
+import '../component/custom-app_bar.dart';
 import '../firebase_settings/firebase_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -22,26 +22,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
   //all users
   final userCollection = FirebaseFirestore.instance.collection('Users');
 
-
-
   @override
   Widget build(BuildContext context) {
     //final screenHeight = MediaQuery.of(context).size.height;
 
-    return  SafeArea(
+    return Container(
+      decoration: const BoxDecoration(
+          /*gradient: LinearGradient(
+            colors: [Color(0xff9c27b0), Color(0xffff9800)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )*/
+         /* gradient: LinearGradient(
+            colors: [Color(0xffe91e63), Color(0xff3f51b5)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )*/
+          /* LinearGradient(
+            colors: [Color(0xff9c27b0), Color(0xff009688)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )*/
+         /* gradient:LinearGradient(
+            colors: [Color(0xffff5722), Color(0xff9c27b0)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )*/
+
+         /* gradient: LinearGradient(
+            colors: [Color(0xff00bcd4), Color(0xffe91e63)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )*/
+          gradient: LinearGradient(
+            colors: [Color(0xff3f51b5), Color(0xffe91e63)],
+            stops: [0.5, 1],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          )
+
+
+
+
+
+      ),
       child: Column(
         children: [
+          const CustomAppBar(),
           const Expanded(
             child: FirebaseProfile(),
           ),
-
-
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: GestureDetector(
-                onTap:  signOut,
+                onTap: signOut,
                 child: Container(
                   width: 200,
                   height: 50,
@@ -64,13 +105,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-
-          SizedBox()
-
+          SizedBox(height: 10,),
         ],
       ),
-
-
     );
   }
 }

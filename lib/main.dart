@@ -15,16 +15,7 @@ class MyApp extends StatelessWidget {
     return   const MaterialApp(
       debugShowCheckedModeBanner: false,
         home: Scaffold(
-      body: /*Container(
-        decoration:  const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xff673ab7), Color(0xff9c27b0)],
-              stops: [0.1, 1],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),),
-       // child:
-            child: const*/  MainPage(),
+      body: MainPage(),
         ),
 
     );

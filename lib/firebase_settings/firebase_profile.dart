@@ -78,14 +78,18 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
                   const SizedBox(
                     height: 50,
                   ),
+
+
                   //email
-                  Text(
+                 /* Text(
                     currentUser.email != null ? currentUser.email! : '',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.black,
                     ),
-                  ),
+                  ),*/
+
+
                   const Padding(
                     padding: EdgeInsets.only(left: 25.0),
                     child: Text(
@@ -98,21 +102,27 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
 
                   //username
 
-                  MyTextBox(
-                    text: userData['username'],
-                    sectionName: 'username',
-                    onPressed: () => editField('username'),
-                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        MyTextBox(
+                          text: userData['username'],
+                          sectionName: 'Username: ',
+                          onPressed: () => editField('username'),
+                        ),
 
-                  MyTextBox(
-                    text: userData['bio'],
-                    sectionName: 'wwwio',
-                    onPressed: () => editField('bio'),
-                  ),
-                  MyTextBox(
-                    text: userData['mobile phone'],
-                    sectionName: 'mobile phone',
-                    onPressed: () => editField('mobile phone'),
+                        MyTextBox(
+                          text: userData['bio'],
+                          sectionName: 'Name: ',
+                          onPressed: () => editField('bio'),
+                        ),
+                        MyTextBox(
+                          text: userData['mobile phone'],
+                          sectionName: 'Phone Number:',
+                          onPressed: () => editField('mobile phone'),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 50,

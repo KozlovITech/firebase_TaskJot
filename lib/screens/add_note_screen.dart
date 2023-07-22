@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../component/custom-app_bar.dart';
+
 class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({Key? key}) : super(key: key);
 
@@ -40,14 +42,12 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     saveIndex();
   }
 
-
-
   Future<void> addNote() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference userCollection =
-    FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('users');
     DocumentReference userDocument =
-    userCollection.doc(userId).collection('Note').doc('$_index');
+        userCollection.doc(userId).collection('Note').doc('$_index');
 
     await userDocument.set({
       'name': nameController.text,
@@ -64,53 +64,58 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  hintText: 'Name Note',
-                ),
-              ),
-              TextFormField(
-                controller: textController,
-                decoration: const InputDecoration(
-                  hintText: 'Text Note',
-                ),
-              ),
-              SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: GestureDetector(
-                  onTap: addNote,
-                  child: Container(
-                    width: 200,
-                    height: 50,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple,
-                      borderRadius: BorderRadius.circular(12),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const CustomAppBar(),
+          Padding(
+            padding:const EdgeInsets.all(20.0),
+            child: Center(
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      hintText: 'Name Note',
                     ),
-                    child: const Center(
-                      child: Text(
-                        'Add Note',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                  ),
+                  TextFormField(
+                    controller: textController,
+                    decoration: const InputDecoration(
+                      hintText: 'Text Note',
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: GestureDetector(
+                      onTap: addNote,
+                      child: Container(
+                        width: 200,
+                        height: 50,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Add Note',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
