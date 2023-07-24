@@ -1,6 +1,5 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:firebasetrain2/screens/add_note_screen.dart';
-import 'package:firebasetrain2/screens/hello_screen.dart';
 import 'package:firebasetrain2/screens/main_screen.dart';
 import 'package:firebasetrain2/screens/note_screen.dart';
 import 'package:firebasetrain2/screens/profile_screen.dart';

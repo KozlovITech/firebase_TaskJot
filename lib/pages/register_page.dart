@@ -23,10 +23,10 @@ class _RegisterPageState extends State<RegisterPage> {
         password: _passwordController.text.trim(),
       );
       //after creating users? create a new doc.
-      FirebaseFirestore.instance. 
-    collection("Users").
-    doc(userCredential.user!.email).
-    set({
+      FirebaseFirestore.instance.
+      collection("Users").
+      doc(userCredential.user!.email).
+      set({
         'username' : _emailController.text.split('@')[0],
         'bio': 'Empty bio..',
         'mobile phone': '+38065'
@@ -198,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 GestureDetector(
                   onTap: widget.showLoginPage,
                   child: const Text(
-                    'Login In',
+                    'Sign In',
                     style: TextStyle(color: Colors.deepPurpleAccent),
                   ),
                 ),

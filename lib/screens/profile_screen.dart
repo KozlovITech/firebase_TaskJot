@@ -13,6 +13,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -79,32 +80,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
+            child:  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: GestureDetector(
-                onTap: signOut,
-                child: Container(
-                  width: 200,
-                  height: 50,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+              child: ElevatedButton(
+                onPressed: signOut,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(200, 50),
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Center(
-                    child: Text(
-                      'Sign Out',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text(
+                  'Sign Out',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
               ),
             ),
-          ),
+              ),
           SizedBox(height: 10,),
         ],
       ),

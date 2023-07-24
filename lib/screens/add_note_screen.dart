@@ -1,3 +1,4 @@
+import 'package:firebasetrain2/Navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,19 +43,35 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     saveIndex();
   }
 
+  void clearTextField(){
+    FocusScope.of(context).unfocus();
+    nameController.clear();
+    textController.clear();
+  }
+
   Future<void> addNote() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference userCollection =
-        FirebaseFirestore.instance.collection('users');
+    FirebaseFirestore.instance.collection('users');
     DocumentReference userDocument =
-        userCollection.doc(userId).collection('Note').doc('$_index');
+    userCollection.doc(userId).collection('Note').doc('$_index');
+
+    Timestamp currentTime = Timestamp.now(); // Отримання поточного часу
 
     await userDocument.set({
       'name': nameController.text,
       'text': textController.text,
+      'timestamp': currentTime, // Додайте поле для часу
     });
 
     indexId();
+    clearTextField();
+    setState(() {}); // оновіть стан, щоб відображення змін
+  }
+
+  void routeNoteScreen() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MainNavigator()));
   }
 
   final nameController = TextEditingController();
@@ -64,58 +81,76 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const CustomAppBar(),
-          Padding(
-            padding:const EdgeInsets.all(20.0),
-            child: Center(
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Name Note',
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomAppBar(),
+            Padding(
+              padding:const EdgeInsets.all(20.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: nameController,
+                      decoration: const InputDecoration(
+                        hintText: 'Name Note',
+                      ),
                     ),
-                  ),
-                  TextFormField(
-                    controller: textController,
-                    decoration: const InputDecoration(
-                      hintText: 'Text Note',
+                    TextFormField(
+                      controller: textController,
+                      decoration: const InputDecoration(
+                        hintText: 'Text Note',
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 25),
+                    const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: GestureDetector(
-                      onTap: addNote,
-                      child: Container(
-                        width: 200,
-                        height: 50,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
+                    child: ElevatedButton(
+                      onPressed: addNote,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(200, 50),
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'Add Note',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
+                        backgroundColor: Colors.deepPurple,
+                      ),
+                      child: const Text(
+                        'Add Note',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                       ),
                     ),
                   ),
-                ],
+
+                    const SizedBox(height: 425),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: FloatingActionButton(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.deepPurple,
+                        onPressed: () {
+                          setState(() {
+                            routeNoteScreen();
+                          });
+
+                        },
+                        child: const Icon(
+                          Icons.home,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

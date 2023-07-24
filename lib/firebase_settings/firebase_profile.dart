@@ -70,25 +70,17 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
               .doc(currentUser.email)
               .snapshots(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              //display data
+            if (snapshot.hasData && snapshot.data != null) {
               final userData = snapshot.data!.data() as Map<String, dynamic>;
+              //display data
+              final username = userData['username'] ?? 'No username';
+              final bio = userData['bio'] ?? 'No bio';
+              final phoneNumber = userData['mobile phone'] ?? 'No phone number';
               return ListView(
                 children: [
                   const SizedBox(
                     height: 50,
                   ),
-
-
-                  //email
-                 /* Text(
-                    currentUser.email != null ? currentUser.email! : '',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),*/
-
 
                   const Padding(
                     padding: EdgeInsets.only(left: 25.0),
@@ -110,7 +102,6 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
                           sectionName: 'Username: ',
                           onPressed: () => editField('username'),
                         ),
-
                         MyTextBox(
                           text: userData['bio'],
                           sectionName: 'Name: ',

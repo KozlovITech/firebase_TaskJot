@@ -78,29 +78,26 @@ class _MainScreenState extends State<MainScreen> {
                   const SizedBox(height: 25,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: GestureDetector(
-                      onTap:  routeNoteScreen,
-                      child: Container(
-                        width: 200,
-                        height: 50,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
+                    child: ElevatedButton(
+                      onPressed: routeNoteScreen,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(200, 50),
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'Go to the NOTE',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
+                       backgroundColor: Colors.deepPurple,
+                      ),
+                      child: const Text(
+                        'Go to the NOTE',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                       ),
                     ),
                   ),
+
                 ],
               ),
             ),

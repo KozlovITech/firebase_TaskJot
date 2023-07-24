@@ -7,11 +7,13 @@ class FirebaseNoteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String userId = FirebaseAuth.instance.currentUser!.uid;
-    CollectionReference note = FirebaseFirestore.instance
+    Query<Map<String, dynamic>> note = FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
-        .collection('Note');
+        .collection('Note')
+        .orderBy('timestamp');
 
     return StreamBuilder<QuerySnapshot>(
       stream: note.snapshots(),

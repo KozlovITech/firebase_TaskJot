@@ -49,21 +49,26 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 height: 100,
                 //color: Colors.deepPurple,
-                child: Center(child: Text("Note",style: TextStyle(fontSize:32,
-                    color: Colors.white,
-                    letterSpacing: 12),
+                child: Center(
+                    child: Text(
+                  "Note",
+                  style: TextStyle(
+                      fontSize: 32, color: Colors.white, letterSpacing: 12),
                 )),
               ),
             ),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Center(
               child: Padding(
                 padding: EdgeInsets.only(left: 65),
-                child: Image.asset('assets/img/log.png',
-                    width: 200,
-                    height: 200,
-                    alignment: Alignment.center,
-                  ),
+                child: Image.asset(
+                  'assets/img/log.png',
+                  width: 200,
+                  height: 200,
+                  alignment: Alignment.center,
+                ),
               ),
             ),
 
