@@ -43,7 +43,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     saveIndex();
   }
 
-  void clearTextField(){
+  void clearTextField() {
     FocusScope.of(context).unfocus();
     nameController.clear();
     textController.clear();
@@ -52,9 +52,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Future<void> addNote() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     CollectionReference userCollection =
-    FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('users');
     DocumentReference userDocument =
-    userCollection.doc(userId).collection('Note').doc('$_index');
+        userCollection.doc(userId).collection('Note').doc('$_index');
 
     Timestamp currentTime = Timestamp.now(); // Отримання поточного часу
 
@@ -63,19 +63,20 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       'text': textController.text,
       'timestamp': currentTime, // Додайте поле для часу
     });
-
-    indexId();
     clearTextField();
+    indexId();
+
     setState(() {}); // оновіть стан, щоб відображення змін
   }
 
   void routeNoteScreen() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MainNavigator()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const MainNavigator()));
   }
 
   final nameController = TextEditingController();
   final textController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           children: [
             const CustomAppBar(),
             Padding(
-              padding:const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Center(
                 child: Column(
                   children: [
@@ -104,44 +105,24 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       ),
                     ),
                     const SizedBox(height: 25),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: ElevatedButton(
-                      onPressed: addNote,
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(200, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: ElevatedButton(
+                        onPressed: addNote,
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(200, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          backgroundColor: Colors.deepPurple,
                         ),
-                        backgroundColor: Colors.deepPurple,
-                      ),
-                      child: const Text(
-                        'Add Note',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                    const SizedBox(height: 425),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: FloatingActionButton(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.deepPurple,
-                        onPressed: () {
-                          setState(() {
-                            routeNoteScreen();
-                          });
-
-                        },
-                        child: const Icon(
-                          Icons.home,
-                          size: 35,
-                          color: Colors.white,
+                        child: const Text(
+                          'Add Note',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
@@ -150,6 +131,26 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
+          child: FloatingActionButton(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.deepPurple,
+            onPressed: () {
+              setState(() {
+                routeNoteScreen();
+              });
+            },
+            child: const Icon(
+              Icons.home,
+              size: 35,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

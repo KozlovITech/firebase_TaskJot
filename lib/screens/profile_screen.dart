@@ -27,84 +27,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     //final screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      decoration: const BoxDecoration(
-          /*gradient: LinearGradient(
-            colors: [Color(0xff9c27b0), Color(0xffff9800)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )*/
-         /* gradient: LinearGradient(
-            colors: [Color(0xffe91e63), Color(0xff3f51b5)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )*/
-          /* LinearGradient(
-            colors: [Color(0xff9c27b0), Color(0xff009688)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )*/
-         /* gradient:LinearGradient(
-            colors: [Color(0xffff5722), Color(0xff9c27b0)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )*/
-
-         /* gradient: LinearGradient(
-            colors: [Color(0xff00bcd4), Color(0xffe91e63)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )*/
-          gradient: LinearGradient(
-            colors: [Color(0xff3f51b5), Color(0xffe91e63)],
-            stops: [0.5, 1],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          )
-
-
-
-
-
-      ),
-      child: Column(
-        children: [
-          const CustomAppBar(),
-          const Expanded(
-            child: FirebaseProfile(),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child:  Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: ElevatedButton(
-                onPressed: signOut,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(200, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  backgroundColor: Colors.deepPurple,
+    return Column(
+      children: [
+        const CustomAppBar(),
+        const Expanded(
+          child: FirebaseProfile(),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child:  Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: ElevatedButton(
+              onPressed: signOut,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text(
-                  'Sign Out',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
+                backgroundColor: Colors.deepPurple,
+              ),
+              child: const Text(
+                'Sign Out',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
                 ),
               ),
             ),
-              ),
-          SizedBox(height: 10,),
-        ],
-      ),
+          ),
+            ),
+        const SizedBox(height: 10,),
+      ],
     );
   }
 }
