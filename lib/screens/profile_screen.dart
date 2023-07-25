@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: [
         const CustomAppBar(),
-        const Expanded(
+        const Flexible(
           child: FirebaseProfile(),
         ),
         Align(

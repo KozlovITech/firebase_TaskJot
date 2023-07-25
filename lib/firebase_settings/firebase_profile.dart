@@ -82,12 +82,15 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
                     height: 50,
                   ),
 
-                  const Padding(
-                    padding: EdgeInsets.only(left: 25.0),
-                    child: Text(
-                      'My details',
-                      style: TextStyle(
+                 Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child:  Text(
+                      'Welcome Back, ${currentUser.email != null ? currentUser.email! : ''}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
                         color: Colors.black,
+                        fontSize: 18,
+
                       ),
                     ),
                   ),
@@ -128,7 +131,7 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
               );
             }
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator( color: Colors.deepPurple,),
             );
           }),
     );

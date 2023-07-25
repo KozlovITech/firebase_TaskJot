@@ -26,15 +26,23 @@ class _NoteScreenState extends State<NoteScreen> {
         child: Column(
           children: [
             CustomAppBar(),
+          /*  Text(
+              'Note',
+              style: TextStyle(
+                  fontSize: 32, color: Colors.deepPurple,
+                  letterSpacing: 12,
+                  fontWeight: FontWeight.w500
+              ),
+            ),*/
             Padding(
               padding: EdgeInsets.only(left: 10.0, right: 10),
               child: Column(
                 children: [
                   SizedBox(
-                    height: 700,
+                    height: 500,
                     child: FirebaseNoteView(),
                   ),
-                  SizedBox(height: 10),
+
                 ],
               ),
             ),

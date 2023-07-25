@@ -62,6 +62,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       'name': nameController.text,
       'text': textController.text,
       'timestamp': currentTime, // Додайте поле для часу
+      'color': dropdownValue,
     });
     clearTextField();
     indexId();
@@ -76,8 +77,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
 
   final nameController = TextEditingController();
   final textController = TextEditingController();
-
-
+  String dropdownValue = 'black';
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -104,6 +104,39 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         hintText: 'Text Note',
                       ),
                     ),
+                    const SizedBox(height: 25),
+
+                  //Choose the color of the note
+                    DropdownButtonFormField(
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder( //<-- SEE HERE
+                          borderSide: BorderSide(color: Colors.black, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder( //<-- SEE HERE
+                          borderSide: BorderSide(color: Colors.black, width: 2),
+                        ),
+                        filled: true,
+                        fillColor: Colors.greenAccent,
+                      ),
+                      dropdownColor: Colors.greenAccent,
+                      value: dropdownValue,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValue = newValue!;
+                        });
+                      },
+                      items: <String>['black', 'red', 'green', 'purple', 'indigo'].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
+
                     const SizedBox(height: 25),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -142,11 +175,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             backgroundColor: Colors.deepPurple,
             onPressed: () {
               setState(() {
-                routeNoteScreen();
+                Navigator.pop(context);
               });
             },
             child: const Icon(
-              Icons.home,
+              Icons.arrow_back_ios_sharp,
               size: 35,
               color: Colors.white,
             ),

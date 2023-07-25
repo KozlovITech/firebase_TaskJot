@@ -3,6 +3,7 @@ import 'package:firebasetrain2/screens/add_note_screen.dart';
 import 'package:firebasetrain2/screens/main_screen.dart';
 import 'package:firebasetrain2/screens/note_screen.dart';
 import 'package:firebasetrain2/screens/profile_screen.dart';
+import 'package:firebasetrain2/screens/to_do_list.dart';
 import 'package:flutter/material.dart';
 
 
@@ -21,8 +22,9 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   final List<Widget> _screens = [
     const MainScreen(),
+    const ToDoList(),
     const NoteScreen(),
-    const AddNoteScreen(),
+    //const AddNoteScreen(),
     const ProfileScreen(),
   ];
 
@@ -48,7 +50,7 @@ class _MainNavigatorState extends State<MainNavigator> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(bottom: 10, top: 10),
+          padding: const EdgeInsets.only(bottom: 10 ),
           child: CustomNavigationBar(
             isFloating: true,
             elevation: 2,
@@ -66,13 +68,16 @@ class _MainNavigatorState extends State<MainNavigator> {
                 ),
               ),
               CustomNavigationBarItem(
+                icon: const Icon(Icons.list,color: Colors.black,),
+                ),
+              CustomNavigationBarItem(
                 icon: Image.asset('assets/img/note_bottom.png',
                 ),
               ),
-              CustomNavigationBarItem(
+           /*   CustomNavigationBarItem(
                 icon: Image.asset('assets/img/create_note_bottom.png',
                 ),
-              ),
+              ),*/
               CustomNavigationBarItem(
                 icon: Image.asset('assets/img/profile_bottom.png',
                 ),

@@ -10,6 +10,7 @@ class FirebaseNoteView extends StatefulWidget {
 }
 
 class _FirebaseNoteViewState extends State<FirebaseNoteView> {
+
   Future<void> editField(
       String field1, String field2, String documentId) async {
     String newValue1 = '';
@@ -17,7 +18,7 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Edit Note'),
+        title: const Text('Edit Note'),
         content: Column(
           children: [
             TextField(
@@ -25,7 +26,7 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
               style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 hintText: 'Enter new $field1',
-                hintStyle: TextStyle(color: Colors.black),
+                hintStyle: const TextStyle(color: Colors.black),
               ),
               onChanged: (value) {
                 newValue1 = value;
@@ -36,7 +37,7 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
               style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 hintText: 'Enter new $field2',
-                hintStyle: TextStyle(color: Colors.black),
+                hintStyle: const TextStyle(color: Colors.black),
               ),
               onChanged: (value) {
                 newValue2 = value;
@@ -83,8 +84,10 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     String userId = FirebaseAuth.instance.currentUser!.uid;
     Query<Map<String, dynamic>> note = FirebaseFirestore.instance
         .collection('users')
@@ -92,83 +95,156 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
         .collection('Note')
         .orderBy('timestamp');
 
+
+    Color stringToColor(String colorString, double saturation) {
+      Color baseColor;
+      if (colorString == 'black') {
+        baseColor = Colors.black;
+      } else if (colorString == 'red') {
+        baseColor = const Color.fromRGBO(255, 2, 26, 1.0);
+      } else if (colorString == 'green') {
+        baseColor = const Color.fromRGBO(56, 222, 0, 1.0);
+      } else if (colorString == 'purple') {
+        baseColor = const Color.fromRGBO(192, 0, 231, 1.0);
+      } else if (colorString == 'indigo') {
+        baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
+      } else {
+        baseColor = Colors.black;
+      }
+
+      final hslColor = HSLColor.fromColor(baseColor);
+      final modifiedHslColor = hslColor.withSaturation(saturation);
+      return modifiedHslColor.toColor();
+    }
+
     return StreamBuilder<QuerySnapshot>(
       stream: note.snapshots(),
       builder: (context, snapshot) {
         List<Widget> clientWidgets = [];
-        if (snapshot.hasData) {
+         if (snapshot.data?.size == 0) {
+        // got data from snapshot but it is empty
+
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 45,),
+              Image.asset('assets/img/cat.png',
+              width: 350,
+              height: 350,
+              ),
+              const SizedBox(height: 25,),
+              const Text(
+              "Add New Note",
+              style: TextStyle(fontSize: 28,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 3),
+              ),
+            ],
+          ),
+        );
+
+        }
+        else if (snapshot.hasData) {
           final clients = snapshot.data?.docs.reversed.toList();
           for (var client in clients!) {
             final clientWidget = Container(
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.black,
+              decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                color: stringToColor(client['color'],0.7),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+
+                    Container(
+                      width: 10,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(15)),
+                        color: stringToColor(client['color'],1),
+                      ),
+                    ),
+
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            client['name'],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                            softWrap: true,
+                          ),
+                          Text(
+                            client['text'],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                            softWrap: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Update
+                    Row(
                       children: [
-                        Text(
-                          client['name'],
-                          style: const TextStyle(
+                        IconButton(
+                          onPressed: () {
+                            editField('name', 'text', client.id);
+                          },
+                          icon: const Icon(
+                            Icons.create,
                             color: Colors.white,
-                            fontSize: 24,
                           ),
-                          softWrap: true,
                         ),
-                        Text(
-                          client['text'],
-                          style: const TextStyle(
+                        // Delete
+                        IconButton(
+                          onPressed: () {
+                            var collection = FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(userId)
+                                .collection('Note');
+                            collection.doc(client.id).delete();
+                          },
+                          icon: const Icon(
+                            Icons.delete,
                             color: Colors.white,
-                            fontSize: 18,
                           ),
-                          softWrap: true,
                         ),
                       ],
                     ),
-                  ),
-                  // Update
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          editField('name', 'text', client.id);
-                        },
-                        icon: const Icon(
-                          Icons.create,
-                          color: Colors.white,
-                        ),
-                      ),
-                      // Delete
-                      IconButton(
-                        onPressed: () {
-                          var collection = FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(userId)
-                              .collection('Note');
-                          collection.doc(client.id).delete();
-                        },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
 
             clientWidgets.add(clientWidget);
           }
+          return ListView(
+            children: clientWidgets,
+          );
+        } else if (snapshot.data?.size == 0) {
+          // got data from snapshot but it is empty
+
+          return const Text(
+            "no data",
+            style: TextStyle(fontSize: 24),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error ${snapshot.error}'),
+          );
         }
-        return ListView(
-          children: clientWidgets,
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Colors.deepPurple,
+          ),
         );
       },
     );

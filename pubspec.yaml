@@ -76,6 +76,8 @@ flutter:
     - assets/img/home_bottom.png
     - assets/img/profile_bottom.png
     - assets/img/create_note_bottom.png
+    - assets/img/cat.png
+    - assets/img/cat_main.png
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
