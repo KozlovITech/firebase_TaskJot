@@ -31,11 +31,11 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
-          const CustomAppBar(),
-          const Expanded(
+          CustomAppBar(),
+          Expanded(
             child: Padding(
               padding: EdgeInsets.fromLTRB(20.0,0,20,20),
               child: Column(
@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
           ),
-          Align(
+         /* Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -70,8 +70,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 20,),
+          ),*/
         ],
       ),
     );

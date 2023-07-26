@@ -66,11 +66,12 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     });
     clearTextField();
     indexId();
+    routeHome();
 
     setState(() {}); // оновіть стан, щоб відображення змін
   }
 
-  void routeNoteScreen() {
+  void routeHome() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const MainNavigator()));
   }

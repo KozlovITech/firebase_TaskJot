@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebasetrain2/screens/add_note_screen.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseMainScreen extends StatefulWidget {
@@ -12,11 +13,17 @@ class FirebaseMainScreen extends StatefulWidget {
 class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
 
 
+  void routeNoteScreen() {
+  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const AddNoteScreen()),
+  );
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    Color stringToColor(String colorString, double saturation) {
+    Color stringToColor(String colorString, double alpha) {
       Color baseColor;
       if (colorString == 'black') {
         baseColor = Colors.black;
@@ -32,9 +39,11 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
         baseColor = Colors.black;
       }
 
-      final hslColor = HSLColor.fromColor(baseColor);
+      /*final hslColor = HSLColor.fromColor(baseColor);
       final modifiedHslColor = hslColor.withSaturation(saturation);
-      return modifiedHslColor.toColor();
+      return modifiedHslColor.toColor();*/
+
+      return baseColor.withOpacity(alpha);
     }
 
 
@@ -44,11 +53,11 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
         .collection('users')
         .doc(userIdNote)
         .collection('Note')
-        .orderBy('timestamp', descending: true)
-        .limit(1);
+        .orderBy('timestamp', descending: false)
+        .limit(4);
 
     String userIdToDoList = FirebaseAuth.instance.currentUser!.uid;
-    Query<Map<String, dynamic>> to_do_list = FirebaseFirestore.instance
+    Query<Map<String, dynamic>> toDoList = FirebaseFirestore.instance
         .collection('users')
         .doc(userIdToDoList)
         .collection('ToDoList')
@@ -66,144 +75,187 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
               fontWeight: FontWeight.w700,
               letterSpacing: 3),
         ),*/
-          Image.asset('assets/img/cat_main.png',
+         /* Image.asset('assets/img/cat_main.png',
             width: 300,
             height: 300,
-          ),
+          ),*/
 
           //SizedBox(height: 150,),
-          //The latest Note
-          const Align(
-            alignment: Alignment.center,
-            child: Text(
-              'The latest Note',
-              style: TextStyle(
-                fontSize: 22,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 2
-              ),
-            ),
-          ),
           SizedBox(
-            height: 100,
             child: StreamBuilder<QuerySnapshot>(
               stream: note.snapshots(),
               builder: (context, snapshot) {
-                List<Widget> clientWidgets = [];
-                if (snapshot.hasData) {
-                  final clients = snapshot.data?.docs.reversed.toList();
-                  for (var client in clients!) {
-                    final clientWidget = Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(10),
-                      decoration:  BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-                        color: stringToColor(client['color'],0.7),
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.deepPurple,
+                    ),
+                  );
+
+                } else if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+                  final clients = snapshot.data!.docs.reversed.toList();
+                  return Column(
+                    children: [
+                      Image.asset('assets/img/cat_main.png',
+                        width: 200,
+                        height: 200,
                       ),
-                      child: IntrinsicHeight(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                      const SizedBox(height: 15),
+                      const Text('Your Last Note',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ),),
 
-                            Container(
-                              width: 10,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                                color: stringToColor(client['color'],1),
-                              ),
-                            ),
-
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    client['name'],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
+                      SizedBox(
+                        height: 400,
+                        child: GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // Two columns
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemCount: clients.length,
+                          itemBuilder: (context, index) {
+                            var client = clients[index];
+                            return Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        height: 160,
+                                        width: 175,
+                                        //margin: const EdgeInsets.only(bottom: 10),
+                                        padding: const EdgeInsets.fromLTRB(0,10,10,10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 4,
+                                            color: stringToColor(client['color'], 0.9),
+                                          ),
+                                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                          color: stringToColor(client['color'], 0.45),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            IntrinsicHeight(
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Container(
+                                                    width: 10,
+                                                    height: 129,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                                      color: stringToColor(client['color'], 0.9),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Flexible(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          client['name'],
+                                                          style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 23,
+                                                          ),
+                                                          softWrap: false,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow.ellipsis,
+                                                        ),
+                                                        Text(
+                                                          client['text'],
+                                                          style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                          ),
+                                                          softWrap: false,
+                                                          maxLines: 3,
+                                                          overflow: TextOverflow.ellipsis,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    softWrap: true,
-                                  ),
-                                  Text(
-                                    client['text'],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
-                                    softWrap: true,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Update
-                            // Delete
-                            IconButton(
-                              onPressed: () {
-                                var collection = FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(userIdNote)
-                                    .collection('Note');
-                                collection.doc(client.id).delete();
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
-                    );
-
-                    clientWidgets.add(clientWidget);
-                  }
-                  return ListView(
-                    children: clientWidgets,
+                    ],
                   );
-                } else if (snapshot.data?.size == 0) {
-                  // got data from snapshot but it is empty
+                } else {
 
-                  return const Text(
-                    "no data",
-                    style: TextStyle(fontSize: 24),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error ${snapshot.error}'),
+                  return SizedBox(
+
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Click on the cat to add a Note before it's too late..",
+                            style: TextStyle(fontSize: 28, letterSpacing: 3),
+                            textAlign: TextAlign.center,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25),
+                            child: TextButton(
+                              onPressed: routeNoteScreen,
+                              child: Image.asset(
+                                'assets/img/cat_notData.png',
+                                width: 400,
+                                height: 400,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   );
                 }
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.deepPurple,
-                  ),
-                );
-              }
+              },
             ),
           ),
-          const SizedBox(height: 15),
-          //The latest Note
-          const Align(
-            alignment: Alignment.center,
-            child: Text(
-              'The latest ToDo',
-              style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 2
-              ),
-            ),
-          ),
+
+
+
           //The latest ToDo List
-          SizedBox(
-            height: 100,
+         /* SizedBox(
+            height:100,
             child: StreamBuilder<QuerySnapshot>(
-              stream: to_do_list.snapshots(),
+              stream: toDoList.snapshots(),
               builder: (context, snapshot) {
                 List<Widget> clientWidgets = [];
+                if (snapshot.data?.size == 0) {
+                  // got data from snapshot but it is empty
+                  return const Text(
+                    "",
+                    style: TextStyle(fontSize: 24),
+                  );
+                }
                 if (snapshot.hasData) {
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'The latest ToDo',
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 2
+                      ),
+                    ),
+                  );
                   final clients = snapshot.data?.docs.reversed.toList();
                   for (var client in clients!) {
                     final clientWidget = Container(
@@ -288,7 +340,9 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                 );
               },
             ),
-          ),
+          ),*/
+
+
         ],
       ),
     );

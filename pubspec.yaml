@@ -78,6 +78,7 @@ flutter:
     - assets/img/create_note_bottom.png
     - assets/img/cat.png
     - assets/img/cat_main.png
+    - assets/img/cat_notData.png
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
