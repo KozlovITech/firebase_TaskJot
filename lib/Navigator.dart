@@ -25,7 +25,7 @@ class _MainNavigatorState extends State<MainNavigator> {
     const ToDoList(),
     const NoteScreen(),
     //const AddNoteScreen(),
-    const ProfileScreen(),
+     ProfileScreen(),
   ];
 
   void _onPageChanged(int index){

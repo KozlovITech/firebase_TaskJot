@@ -99,27 +99,32 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         hintText: 'Name Note',
                       ),
                     ),
-                    TextFormField(
+                    TextField(
                       controller: textController,
                       decoration: const InputDecoration(
                         hintText: 'Text Note',
+                        //border: OutlineInputBorder(),
                       ),
+                      minLines: 1,
+                      maxLines: 50,
                     ),
                     const SizedBox(height: 25),
 
                   //Choose the color of the note
                     DropdownButtonFormField(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
                       decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder( //<-- SEE HERE
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black, width: 2),
                         ),
-                        focusedBorder: OutlineInputBorder( //<-- SEE HERE
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
                           borderSide: BorderSide(color: Colors.black, width: 2),
                         ),
                         filled: true,
-                        fillColor: Colors.greenAccent,
+                        fillColor: Colors.white,
                       ),
-                      dropdownColor: Colors.greenAccent,
+                      dropdownColor: Colors.white,
                       value: dropdownValue,
                       onChanged: (String? newValue) {
                         setState(() {

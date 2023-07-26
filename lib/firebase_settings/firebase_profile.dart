@@ -82,7 +82,7 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
                     height: 50,
                   ),
 
-                 Padding(
+                  Padding(
                     padding: const EdgeInsets.only(left: 25.0),
                     child:  Text(
                       'Welcome Back, ${currentUser.email != null ? currentUser.email! : ''}',

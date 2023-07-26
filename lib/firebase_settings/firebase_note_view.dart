@@ -121,28 +121,28 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
       stream: note.snapshots(),
       builder: (context, snapshot) {
         List<Widget> clientWidgets = [];
-         if (snapshot.data?.size == 0) {
-        // got data from snapshot but it is empty
+        if (snapshot.data?.size == 0) {
+          // got data from snapshot but it is empty
 
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 45,),
-              Image.asset('assets/img/cat.png',
-              width: 350,
-              height: 350,
-              ),
-              const SizedBox(height: 25,),
-              const Text(
-              "Add New Note",
-              style: TextStyle(fontSize: 28,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 3),
-              ),
-            ],
-          ),
-        );
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 45,),
+                Image.asset('assets/img/cat.png',
+                  width: 350,
+                  height: 350,
+                ),
+                const SizedBox(height: 25,),
+                const Text(
+                  "Add New Note",
+                  style: TextStyle(fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 3),
+                ),
+              ],
+            ),
+          );
 
         }
         else if (snapshot.hasData) {
@@ -150,25 +150,26 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
           for (var client in clients!) {
             final clientWidget = Container(
               margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(10),
-              decoration:  BoxDecoration(
+              padding: const EdgeInsets.fromLTRB(0,10,10,10),
+              decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
-                color: stringToColor(client['color'],0.7),
+                color: stringToColor(client['color'], 0.3),
               ),
               child: IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-
                     Container(
                       width: 10,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-                        color: stringToColor(client['color'],1),
+                     // height: 40,
+                      decoration:  BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: stringToColor(client['color'], 1),
                       ),
                     ),
+                    const SizedBox(width: 10), // Додайте відступ 5 між першим і другим контейнером
 
-                    Flexible(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -191,7 +192,6 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
                         ],
                       ),
                     ),
-                    // Update
                     Row(
                       children: [
                         IconButton(
@@ -203,7 +203,6 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
                             color: Colors.white,
                           ),
                         ),
-                        // Delete
                         IconButton(
                           onPressed: () {
                             var collection = FirebaseFirestore.instance
