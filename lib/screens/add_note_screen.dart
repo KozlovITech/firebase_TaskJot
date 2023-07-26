@@ -153,7 +153,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          backgroundColor: Colors.deepPurple,
+                          backgroundColor: Color.fromRGBO(255, 90, 95, 1),
                         ),
                         child: const Text(
                           'Add Note',
@@ -178,7 +178,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
           child: FloatingActionButton(
             foregroundColor: Colors.black,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Color.fromRGBO(255, 90, 95, 1),
             onPressed: () {
               setState(() {
                 Navigator.pop(context);

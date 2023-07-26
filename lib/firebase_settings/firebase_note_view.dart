@@ -96,7 +96,7 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
         .orderBy('timestamp');
 
 
-    Color stringToColor(String colorString, double saturation) {
+   /* Color stringToColor(String colorString, double saturation) {
       Color baseColor;
       if (colorString == 'black') {
         baseColor = Colors.black;
@@ -115,7 +115,29 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
       final hslColor = HSLColor.fromColor(baseColor);
       final modifiedHslColor = hslColor.withSaturation(saturation);
       return modifiedHslColor.toColor();
+    }*/
+
+    Color stringToColor(String colorString, double saturation) {
+      Color baseColor;
+      if (colorString == 'black') {
+        baseColor = Colors.black;
+      } else if (colorString == 'red') {
+        baseColor = const Color.fromRGBO(255, 177, 107, 1.0);
+      } else if (colorString == 'green') {
+        baseColor = const Color.fromRGBO(128, 203, 196, 1.0);
+      } else if (colorString == 'purple') {
+        baseColor = const Color.fromRGBO(255, 205, 86, 1.0);
+      } else if (colorString == 'indigo') {
+        baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
+      } else {
+        baseColor = Colors.black;
+      }
+
+      final hslColor = HSLColor.fromColor(baseColor);
+      final modifiedHslColor = hslColor.withSaturation(saturation);
+      return modifiedHslColor.toColor();
     }
+
 
     return StreamBuilder<QuerySnapshot>(
       stream: note.snapshots(),
@@ -137,8 +159,10 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
                 const Text(
                   "Add New Note",
                   style: TextStyle(fontSize: 28,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700,
-                      letterSpacing: 3),
+                      //letterSpacing: 3
+                  ),
                 ),
               ],
             ),
@@ -155,71 +179,77 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                 color: stringToColor(client['color'], 0.3),
               ),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      width: 10,
-                     // height: 40,
-                      decoration:  BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: stringToColor(client['color'], 1),
-                      ),
-                    ),
-                    const SizedBox(width: 10), // Додайте відступ 5 між першим і другим контейнером
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            client['name'],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                            ),
-                            softWrap: true,
-                          ),
-                          Text(
-                            client['text'],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                            softWrap: true,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            editField('name', 'text', client.id);
-                          },
-                          icon: const Icon(
-                            Icons.create,
-                            color: Colors.white,
+              child: Column(
+                children: [
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: 10,
+                         // height: 40,
+                          decoration:  BoxDecoration(
+                            borderRadius: const BorderRadius.all(Radius.circular(15)),
+                            color: stringToColor(client['color'], 1),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            var collection = FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(userId)
-                                .collection('Note');
-                            collection.doc(client.id).delete();
-                          },
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.white,
+                        const SizedBox(width: 10), // Додайте відступ 5 між першим і другим контейнером
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                client['name'],
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(51, 51, 51, 1),
+                                  fontFamily: 'Roboto',
+                                  fontSize: 24,
+                                ),
+                                softWrap: true,
+                              ),
+                              Text(
+                                client['text'],
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(51, 51, 51, 1),
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18,
+                                ),
+                                softWrap: true,
+                              ),
+                            ],
                           ),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                editField('name', 'text', client.id);
+                              },
+                              icon: const Icon(
+                                Icons.create,
+                                color: Colors.white,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                var collection = FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(userId)
+                                    .collection('Note');
+                                collection.doc(client.id).delete();
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
 

@@ -57,22 +57,26 @@ class _MainNavigatorState extends State<MainNavigator> {
             iconSize: 35,
             borderRadius: const Radius.circular(20),
             selectedColor: Colors.white,
-            unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
+            unSelectedColor: const Color.fromARGB(147, 157, 168, 129),
             //backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-            backgroundColor: const Color.fromRGBO(103, 58, 183, 1),
+            backgroundColor: const Color.fromRGBO(65, 77, 87, 1.0),
 
             strokeColor: Colors.white,
             items: [
               CustomNavigationBarItem(
                 icon: Image.asset('assets/img/home_bottom.png',
+                  color: Colors.white70,
                 ),
               ),
               CustomNavigationBarItem(
-                icon: const Icon(Icons.list,color: Colors.black,),
+                icon: Center(
+                  child:Image.asset('assets/img/toDo_list.png',
+                    color: Colors.white70, ),
+                ),
                 ),
               CustomNavigationBarItem(
                 icon: Image.asset('assets/img/note_bottom.png',
-                ),
+                  color: Colors.white70, ),
               ),
            /*   CustomNavigationBarItem(
                 icon: Image.asset('assets/img/create_note_bottom.png',
@@ -80,7 +84,7 @@ class _MainNavigatorState extends State<MainNavigator> {
               ),*/
               CustomNavigationBarItem(
                 icon: Image.asset('assets/img/profile_bottom.png',
-                ),
+                  color: Colors.white70, ),
               ),
             ],
             onTap: _onItemTapped,

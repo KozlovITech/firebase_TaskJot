@@ -26,14 +26,16 @@ class _NoteScreenState extends State<NoteScreen> {
         child: Column(
           children: [
             CustomAppBar(),
-          /*  Text(
+            SizedBox(height: 15,),
+            Text(
               'Note',
               style: TextStyle(
-                  fontSize: 32, color: Colors.deepPurple,
-                  letterSpacing: 12,
+                  fontSize: 32, color: Color.fromRGBO(36, 41, 46, 1),
+                  fontFamily: 'Poppins',
+                  letterSpacing: 2,
                   fontWeight: FontWeight.w500
               ),
-            ),*/
+            ),
             Padding(
               padding: EdgeInsets.only(left: 10.0, right: 10),
               child: Column(
@@ -55,7 +57,7 @@ class _NoteScreenState extends State<NoteScreen> {
           padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
           child: FloatingActionButton(
             foregroundColor: Colors.black,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor:  Color.fromRGBO(51, 102, 153, 1),
             onPressed: () {
               setState(() {
                 routeNoteScreen();

@@ -27,11 +27,12 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: 15,),
           const Text(
             'ToDo List',
             style: TextStyle(
-                fontSize: 32, color: Colors.deepPurple,
-                letterSpacing: 12,
+                fontFamily: 'Poppins',
+                fontSize: 32, color: Color.fromRGBO(36, 41, 46, 1),
                 fontWeight: FontWeight.w500
             ),
           ),
@@ -49,7 +50,7 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
                       padding: const EdgeInsets.all(5),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
+                        color: Color.fromRGBO(255, 177, 107, 0.7),
                       ),
                       child: Column(
                         children: [
@@ -82,7 +83,7 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
                                       Text(
                                         client['toDoText'],
                                         style: const TextStyle(
-                                          color: Colors.black,
+                                          color: Color.fromRGBO(51, 51, 51, 1),
                                           fontSize: 24,
                                         ),
                                         softWrap: true,

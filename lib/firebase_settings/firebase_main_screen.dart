@@ -23,9 +23,9 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
   @override
   Widget build(BuildContext context) {
 
-    Color stringToColor(String colorString, double alpha) {
+    Color stringToColor(String colorString, double saturation) {
       Color baseColor;
-      if (colorString == 'black') {
+      /*if (colorString == 'black') {
         baseColor = Colors.black;
       } else if (colorString == 'red') {
         baseColor = const Color.fromRGBO(255, 2, 26, 1.0);
@@ -37,13 +37,26 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
         baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
       } else {
         baseColor = Colors.black;
+      }*/
+      if (colorString == 'black') {
+        baseColor = Colors.black;
+      } else if (colorString == 'red') {
+        baseColor = const Color.fromRGBO(255, 177, 107, 1.0);
+      } else if (colorString == 'green') {
+        baseColor = const Color.fromRGBO(128, 203, 196, 1.0);
+      } else if (colorString == 'purple') {
+        baseColor = const Color.fromRGBO(255, 205, 86, 1.0);
+      } else if (colorString == 'indigo') {
+        baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
+      } else {
+        baseColor = Colors.black;
       }
 
-      /*final hslColor = HSLColor.fromColor(baseColor);
+      final hslColor = HSLColor.fromColor(baseColor);
       final modifiedHslColor = hslColor.withSaturation(saturation);
-      return modifiedHslColor.toColor();*/
+      return modifiedHslColor.toColor();
 
-      return baseColor.withOpacity(alpha);
+     // return baseColor.withOpacity(alpha);
     }
 
 
@@ -103,6 +116,7 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                       const SizedBox(height: 15),
                       const Text('Your Last Note',
                       style: TextStyle(
+                        fontFamily: 'Poppins',
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                       ),),
@@ -126,7 +140,7 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                                       alignment: Alignment.topLeft,
                                       child: Container(
                                         height: 160,
-                                        width: 175,
+                                        width: 160,
                                         //margin: const EdgeInsets.only(bottom: 10),
                                         padding: const EdgeInsets.fromLTRB(0,10,10,10),
                                         decoration: BoxDecoration(
@@ -158,7 +172,8 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                                                         Text(
                                                           client['name'],
                                                           style: const TextStyle(
-                                                            color: Colors.white,
+                                                            color: Color.fromRGBO(51, 51, 51, 1),
+                                                            fontFamily: 'Roboto',
                                                             fontSize: 23,
                                                           ),
                                                           softWrap: false,
@@ -168,7 +183,8 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                                                         Text(
                                                           client['text'],
                                                           style: const TextStyle(
-                                                            color: Colors.white,
+                                                            color: Color.fromRGBO(51, 51, 51, 1),
+                                                            fontFamily: 'Roboto',
                                                             fontSize: 18,
                                                           ),
                                                           softWrap: false,
@@ -204,7 +220,9 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
                         children: [
                           const Text(
                             "Click on the cat to add a Note before it's too late..",
-                            style: TextStyle(fontSize: 28, letterSpacing: 3),
+                            style: TextStyle(fontSize: 28,
+                                fontFamily: 'Poppins',
+                                letterSpacing: 3),
                             textAlign: TextAlign.center,
                           ),
                           Padding(
@@ -226,123 +244,6 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
               },
             ),
           ),
-
-
-
-          //The latest ToDo List
-         /* SizedBox(
-            height:100,
-            child: StreamBuilder<QuerySnapshot>(
-              stream: toDoList.snapshots(),
-              builder: (context, snapshot) {
-                List<Widget> clientWidgets = [];
-                if (snapshot.data?.size == 0) {
-                  // got data from snapshot but it is empty
-                  return const Text(
-                    "",
-                    style: TextStyle(fontSize: 24),
-                  );
-                }
-                if (snapshot.hasData) {
-                  const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'The latest ToDo',
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 2
-                      ),
-                    ),
-                  );
-                  final clients = snapshot.data?.docs.reversed.toList();
-                  for (var client in clients!) {
-                    final clientWidget = Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            onTap: () {
-                              setState(() {
-                                client.reference.update({
-                                  'isChecked': !client['isChecked'],
-                                });
-                              });
-                            },
-                            leading: Checkbox(
-                              value: client['isChecked'] ?? false,
-                              onChanged: (value) {
-                                setState(() {
-                                  client.reference.update({
-                                    'isChecked': value,
-                                  });
-                                });
-                              },
-                            ),
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        client['toDoText'],
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 24,
-                                        ),
-                                        softWrap: false,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    var collection = FirebaseFirestore.instance
-                                        .collection('users')
-                                        .doc(userIdToDoList)
-                                        .collection('ToDoList');
-                                    collection.doc(client.id).delete();
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                    clientWidgets.add(clientWidget);
-                  }
-                  return ListView(
-                    children: clientWidgets,
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error ${snapshot.error}'),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.deepPurple,
-                  ),
-                );
-              },
-            ),
-          ),*/
-
-
         ],
       ),
     );

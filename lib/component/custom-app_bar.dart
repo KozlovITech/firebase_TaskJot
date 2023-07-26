@@ -8,18 +8,22 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
+       /* gradient: LinearGradient(
           colors: [Color(0xff673ab7), Color(0xff9c27b0)],
           stops: [0.1, 1],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-        ),
+        ),*/
+        color: Color.fromRGBO(36, 41, 46,1)
       ),
       height: 100,
       //color: Colors.deepPurple,
-      child: const Center(child: Text("Note",style: TextStyle(fontSize:32,
-          color: Colors.white,
-          letterSpacing: 12),
+      child: const Center(child: Text("TaskJot",style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize:32,
+          color: Color.fromRGBO(255, 255, 255,1),
+          //letterSpacing: 12
+      ),
       )),
     );
   }

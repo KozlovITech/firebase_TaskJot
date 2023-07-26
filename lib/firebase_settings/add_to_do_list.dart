@@ -117,7 +117,7 @@ class _AddToDoListState extends State<AddToDoList> {
         padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
         child: FloatingActionButton(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Color.fromRGBO(255, 90, 95, 1),
           onPressed: () {
             setState(() {
               createField('toDoText');

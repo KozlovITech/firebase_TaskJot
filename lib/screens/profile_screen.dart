@@ -25,11 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final screenHeight = MediaQuery.of(context).size.height;
 
     return Column(
       children: [
         const CustomAppBar(),
+        Image.asset('assets/img/cat_profile.png',
+          width: 200,
+          height: 200,
+        ),
         const Flexible(
           child: FirebaseProfile(),
         ),
@@ -44,20 +47,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                backgroundColor: Colors.deepPurple,
+                backgroundColor: const Color.fromRGBO(51, 102, 153, 1),
               ),
               child: const Text(
                 'Sign Out',
                 style: TextStyle(
                   color: Colors.white,
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: 18,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(height: 15),
       ],
     );
   }

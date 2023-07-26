@@ -15,8 +15,8 @@ class MyTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.black,
+      decoration:  BoxDecoration(
+          color: const Color.fromRGBO(128, 203, 196, 1.0),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.only(
@@ -37,7 +37,9 @@ class MyTextBox extends StatelessWidget {
                       Text(
                         sectionName,
                         style: const TextStyle(
-                            color: Color.fromRGBO(144, 10, 206, 1.0), fontSize: 20),
+                            color: Color.fromRGBO(51, 51, 51, 1),
+                            fontFamily: 'Roboto',
+                            fontSize: 20),
                       ),
                     ],
                   ),
@@ -47,7 +49,9 @@ class MyTextBox extends StatelessWidget {
               Text(
                 text,
                 style: const TextStyle(
-                    color: Color.fromRGBO(14, 236, 223, 1), fontSize: 20),
+                    color: Color.fromRGBO(51, 51, 51, 1),
+                    fontFamily: 'Roboto',
+                    fontSize: 20),
               ),
             ],
           ),
@@ -55,7 +59,7 @@ class MyTextBox extends StatelessWidget {
             onPressed: onPressed,
             icon: const Icon(
               Icons.settings,
-              color: Color.fromRGBO(144, 10, 206, 1.0),
+              color: Color.fromRGBO(204, 0, 0, 1),
             ),
           ),
         ],

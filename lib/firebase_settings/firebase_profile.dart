@@ -78,25 +78,19 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
               final phoneNumber = userData['mobile phone'] ?? 'No phone number';
               return ListView(
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-
                   Padding(
                     padding: const EdgeInsets.only(left: 25.0),
                     child:  Text(
                       'Welcome Back, ${currentUser.email != null ? currentUser.email! : ''}',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
+                        fontFamily: 'Roboto',
                         color: Colors.black,
-                        fontSize: 18,
-
+                        fontWeight: FontWeight.w500,
+                        fontSize: 24,
                       ),
                     ),
                   ),
-
-                  //username
-
                   SingleChildScrollView(
                     child: Column(
                       children: [
