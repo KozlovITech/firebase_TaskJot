@@ -86,7 +86,7 @@ class _FirebaseProfileState extends State<FirebaseProfile> {
                       style: const TextStyle(
                         fontFamily: 'Roboto',
                         color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         fontSize: 24,
                       ),
                     ),

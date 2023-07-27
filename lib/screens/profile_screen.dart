@@ -47,12 +47,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                backgroundColor: const Color.fromRGBO(51, 102, 153, 1),
+                backgroundColor: const Color.fromRGBO(218, 165, 32, 1),
               ),
               child: const Text(
                 'Sign Out',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromRGBO(0, 0, 0, 1),
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

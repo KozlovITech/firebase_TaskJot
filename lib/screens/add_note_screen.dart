@@ -78,7 +78,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
 
   final nameController = TextEditingController();
   final textController = TextEditingController();
-  String dropdownValue = 'black';
+  String dropdownValue = 'Pale orange';
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -131,7 +131,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           dropdownValue = newValue!;
                         });
                       },
-                      items: <String>['black', 'red', 'green', 'purple', 'indigo'].map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[ 'Pale orange', 'Dark turquoise', 'Golden Yellow', ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(

@@ -59,7 +59,7 @@ class _MainNavigatorState extends State<MainNavigator> {
             selectedColor: Colors.white,
             unSelectedColor: const Color.fromARGB(147, 157, 168, 129),
             //backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-            backgroundColor: const Color.fromRGBO(65, 77, 87, 1.0),
+            backgroundColor: const Color.fromRGBO(3, 14, 26, 1.0),
 
             strokeColor: Colors.white,
             items: [

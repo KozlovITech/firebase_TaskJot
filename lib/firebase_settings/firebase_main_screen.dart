@@ -23,43 +23,24 @@ class _FirebaseMainScreenState extends State<FirebaseMainScreen> {
   @override
   Widget build(BuildContext context) {
 
-    Color stringToColor(String colorString, double saturation) {
-      Color baseColor;
-      /*if (colorString == 'black') {
-        baseColor = Colors.black;
-      } else if (colorString == 'red') {
-        baseColor = const Color.fromRGBO(255, 2, 26, 1.0);
-      } else if (colorString == 'green') {
-        baseColor = const Color.fromRGBO(56, 222, 0, 1.0);
-      } else if (colorString == 'purple') {
-        baseColor = const Color.fromRGBO(192, 0, 231, 1.0);
-      } else if (colorString == 'indigo') {
-        baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
-      } else {
-        baseColor = Colors.black;
-      }*/
-      if (colorString == 'black') {
-        baseColor = Colors.black;
-      } else if (colorString == 'red') {
+    Color stringToColor(String colorString, double alpha) {
+       Color baseColor;
+       if (colorString == 'Pale orange') {
         baseColor = const Color.fromRGBO(255, 177, 107, 1.0);
-      } else if (colorString == 'green') {
+      } else if (colorString == 'Dark turquoise') {
         baseColor = const Color.fromRGBO(128, 203, 196, 1.0);
-      } else if (colorString == 'purple') {
+      } else if (colorString == 'Golden Yellow') {
         baseColor = const Color.fromRGBO(255, 205, 86, 1.0);
-      } else if (colorString == 'indigo') {
-        baseColor = const Color.fromRGBO(1, 40, 222, 1.0);
       } else {
-        baseColor = Colors.black;
+        baseColor = const Color.fromRGBO(255, 177, 107, 1.0);
       }
 
-      final hslColor = HSLColor.fromColor(baseColor);
+     /* final hslColor = HSLColor.fromColor(baseColor);
       final modifiedHslColor = hslColor.withSaturation(saturation);
-      return modifiedHslColor.toColor();
+      return modifiedHslColor.toColor();*/
 
-     // return baseColor.withOpacity(alpha);
+      return baseColor.withOpacity(alpha);
     }
-
-
 
     String userIdNote = FirebaseAuth.instance.currentUser!.uid;
     Query<Map<String, dynamic>> note = FirebaseFirestore.instance

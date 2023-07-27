@@ -27,7 +27,7 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 15,),
+          const SizedBox(height: 15),
           const Text(
             'ToDo List',
             style: TextStyle(
@@ -42,7 +42,33 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
               stream: note.snapshots(),
               builder: (context, snapshot) {
                 List<Widget> clientWidgets = [];
-                if (snapshot.hasData) {
+
+                if (snapshot.data?.size == 0) {
+                  // got data from snapshot but it is empty
+
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 45,),
+                        Image.asset('assets/img/cat_toDo.png',
+                          width: 350,
+                          height: 350,
+                        ),
+
+                        const SizedBox(height: 25,),
+                        const Text(
+                          "Waiting for ToDo",
+                          style: TextStyle(fontSize: 28,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            //letterSpacing: 3
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasData) {
                   final clients = snapshot.data?.docs.reversed.toList();
                   for (var client in clients!) {
                     final clientWidget = Container(
@@ -128,40 +154,6 @@ class _FirebaseToDoListState extends State<FirebaseToDoList> {
               },
             ),
           ),
-
-          /*  Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
-              child: FloatingActionButton(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.deepPurple,
-                onPressed: () {
-                  setState(() {
-                    createField('toDoText');
-                  });
-                },
-                child: const Icon(
-                  Icons.add,
-                  size: 35,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),*/
-
-          /* Align(
-            alignment: Alignment.center,
-            child: IconButton(
-              onPressed: () {
-                createField('toDoText');
-              },
-              icon: const Icon(
-                Icons.add,
-                color: Colors.black,
-              ),
-            ),
-          ),*/
         ],
       ),
     );

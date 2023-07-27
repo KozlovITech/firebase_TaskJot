@@ -41,6 +41,7 @@ flutter:
     - assets/img/cat_notData.png
     - assets/img/cat_profile.png
     - assets/img/toDo_list.png
+    - assets/img/cat_toDo.png
 
   fonts:
     - family: Poppins
