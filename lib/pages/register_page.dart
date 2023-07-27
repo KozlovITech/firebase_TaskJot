@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      //after creating users? create a new doc.
+
       FirebaseFirestore.instance.
       collection("Users").
       doc(userCredential.user!.email).
@@ -46,10 +46,24 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   bool passwordConfirmed() {
-    if (_passwordController.text.trim() ==
-        _confirmPasswordController.text.trim()) {
-      return true;
+    String password = _passwordController.text.trim();
+    String confirmPassword = _confirmPasswordController.text.trim();
+
+    if (password == confirmPassword) {
+      if (password.length >= 6) {
+        return true;
+      } else {
+        // Password length is less than 6 characters
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Password must be at least 6 characters long')),
+        );
+        return false;
+      }
     } else {
+      // Passwords don't match
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
       return false;
     }
   }
