@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebasetrain2/Navigator.dart';
+import 'package:firebasetrain2/component/custom-app_bar.dart';
 import 'package:flutter/material.dart';
 
 class VerifyEmailPage extends StatefulWidget {
@@ -63,44 +64,89 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     setState(() => canResendEmail = true);
   }
 
+  @override
   Widget build(BuildContext context) => isEmailVerified
       ? const MainNavigator()
       : Scaffold(
-          appBar: AppBar(
-            title: const Text('Verified Page'),
-          ),
           body: Column(
             children: [
-              ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
+              const CustomAppBar(),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                'Confirm Your Email',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Roboto',
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                child: Text(
+                  "Thanks for signing up! To activate your account, please confirm your email address by clicking on the verification link we've sent to your email. Don't forget to check your spam folder if you can't find the email",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Roboto',
+                    fontSize: 22,
                   ),
-                  icon: const Icon(Icons.email, size: 32),
-                  label: const Text('Resent Email'),
-                  onPressed: canResendEmail ? sendVerificationEmail : null),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 30),
+              Image.asset('assets/img/cat_toDo.png',
+                width: 350,
+                height: 350,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50,50,50,35),
+                child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.email,
+                      size: 32,
+                      color: Color.fromRGBO(218, 165, 32, 1),
+                    ),
+                    label: const Text(
+                      'Resent Email',
+                      style: TextStyle(
+                        color: Color.fromRGBO(218, 165, 32, 1),
+                      ),
+                    ),
+                    onPressed: canResendEmail ? sendVerificationEmail : null),
+              ),
+
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Padding(
+                child:  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: GestureDetector(
-                    onTap: signOut,
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                  child: ElevatedButton(
+                    onPressed: signOut,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(200, 50),
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Sign Out',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        ),
+                      backgroundColor: const Color.fromRGBO(218, 165, 32, 1),
+                    ),
+                    child: const Text(
+                      'Sign Out',
+                      style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                     ),
                   ),
@@ -108,5 +154,5 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
               ),
             ],
           ),
-  );
+        );
 }

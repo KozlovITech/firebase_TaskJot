@@ -167,7 +167,7 @@ class _FirebaseNoteViewState extends State<FirebaseNoteView> {
                             color: stringToColor(client['color'], 1),
                           ),
                         ),
-                        const SizedBox(width: 10), // Додайте відступ 5 між першим і другим контейнером
+                        const SizedBox(width: 10),
 
                         Expanded(
                           child: Column(

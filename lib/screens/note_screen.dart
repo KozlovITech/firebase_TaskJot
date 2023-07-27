@@ -1,6 +1,6 @@
 import 'package:firebasetrain2/screens/add_note_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
 import '../component/custom-app_bar.dart';
 import '../firebase_settings/firebase_note_view.dart';
 
@@ -41,7 +41,7 @@ class _NoteScreenState extends State<NoteScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 500,
+                   height: 630,
                     child: FirebaseNoteView(),
                   ),
 

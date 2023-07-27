@@ -56,14 +56,14 @@ class _AddToDoListState extends State<AddToDoList> {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Edit Note'),
+        title: const Text('Add ToDo'),
         content: Column(
           children: [
             TextField(
               autofocus: true,
               style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                hintText: 'Enter new $field1',
+                hintText: 'Enter new ToDo',
                 hintStyle: const TextStyle(color: Colors.black),
               ),
               onChanged: (value) {

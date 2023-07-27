@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
 
@@ -14,17 +12,20 @@ class CustomAppBar extends StatelessWidget {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
         ),*/
-        color: Color.fromRGBO(36, 41, 46,1)
+        color: Color.fromRGBO(36, 41, 46,1),
       ),
-      height: 100,
+      height: 80,
       //color: Colors.deepPurple,
-      child: const Center(child: Text("TaskJot",style: TextStyle(
-          fontFamily: 'Poppins',
-          fontSize:32,
-          color: Color.fromRGBO(255, 255, 255,1),
-          //letterSpacing: 12
+      child: const Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: Center(child: Text("TaskJot",style: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize:32,
+            color: Color.fromRGBO(255, 255, 255,1),
+            //letterSpacing: 12
+        ),
+        )),
       ),
-      )),
     );
   }
 }

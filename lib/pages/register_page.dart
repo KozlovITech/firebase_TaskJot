@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import '../component/custom-app_bar.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -61,26 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ClipPath(
-              clipper: WaveClipperOne(),
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xff673ab7), Color(0xff9c27b0)],
-                    stops: [0.1, 1],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
-                height: 100,
-                //color: Colors.deepPurple,
-                child: const Center(child: Text("Note",style: TextStyle(fontSize:32,
-                    color: Colors.white,
-                    letterSpacing: 12),
-                )),
-              ),
-            ),
-            const SizedBox(height: 50,),
+            CustomAppBar(),
+            const SizedBox(height: 35,),
             Padding(
               padding: const EdgeInsets.only(left: 65),
               child: Image.asset('assets/img/log.png',
@@ -94,14 +76,16 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const Text(
               'REGISTER',
-              style: TextStyle(fontSize: 48),
+              style: TextStyle(fontSize: 48,
+                fontFamily: 'Poppins',),
             ),
             const SizedBox(
               height: 10,
             ),
             const Text(
               'Register below!',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20,
+                fontFamily: 'Poppins',),
             ),
             const SizedBox(
               height: 30,
@@ -171,14 +155,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Center(
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color.fromRGBO(218, 165, 32, 1),
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -199,7 +183,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   onTap: widget.showLoginPage,
                   child: const Text(
                     'Sign In',
-                    style: TextStyle(color: Colors.deepPurpleAccent),
+                    style: TextStyle(color: Color.fromRGBO(218, 165, 32, 1),
+                      fontFamily: 'Roboto',),
                   ),
                 ),
               ],

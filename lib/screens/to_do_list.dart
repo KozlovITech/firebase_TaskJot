@@ -2,7 +2,7 @@ import 'package:firebasetrain2/Navigator.dart';
 import 'package:firebasetrain2/firebase_settings/add_to_do_list.dart';
 import 'package:firebasetrain2/screens/add_note_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+
 import '../component/custom-app_bar.dart';
 import '../firebase_settings/firebase_note_view.dart';
 import '../firebase_settings/firebase_to_do_list.dart';
@@ -35,7 +35,7 @@ class _ToDoListState extends State<ToDoList> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 700,
+                    height: 690,
                     child: FirebaseToDoList(),
                   ),
                   SizedBox(height: 10),
